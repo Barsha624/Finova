@@ -15,11 +15,9 @@ jobs:
 test:
 name: Install and Test Finova
 runs-on: ubuntu-latest
-
-```
 steps:
-  - name: Check out repository
-    uses: actions/checkout@v4
+- name: Check out repository
+uses: actions/checkout@v4
 
   - name: Set up Python
     uses: actions/setup-python@v5
@@ -33,4 +31,4 @@ steps:
 
   - name: Run automated tests
     run: python -m pytest -v
-```
+
