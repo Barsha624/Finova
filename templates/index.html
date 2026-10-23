@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finova | Personal Finance Analytics</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <aside class="sidebar">
+            <a class="brand" href="/">
+                <span class="brand-icon">F</span>
+                <span>finova<span class="brand-dot">.</span></span>
+            </a>
+
+            <div class="workspace-label">WORKSPACE</div>
+
+            <nav class="navigation">
+                <a class="nav-item active" href="/">
+                    <span class="nav-icon">◫</span>
+                    Overview
+                </a>
+                <a class="nav-item" href="#transactions">
+                    <span class="nav-icon">↔</span>
+                    Transactions
+                </a>
+                <a class="nav-item" href="#analytics">
+                    <span class="nav-icon">▥</span>
+                    Analytics
+                </a>
+                <a class="nav-item" href="#budget">
+                    <span class="nav-icon">◎</span>
+                    Budgets
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="demo-badge">
+                    <span class="status-dot"></span>
+                    Demo environment
+                </div>
+
+                <div class="profile">
+                    <div class="avatar">F</div>
+                    <div>
+                        <strong>Finova User</strong>
+                        <span>Personal account</span>
+                    </div>
+                    <span class="profile-menu">···</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <div class="breadcrumb">Workspace / <span>Overview</span></div>
+                    <h1>Financial overview</h1>
+                    <p class="page-subtitle">Make every rupee count.</p>
+                </div>
+
+                <div class="topbar-actions">
+                    <span class="live-status">
+                        <span class="status-dot"></span>
+                        System operational
+                    </span>
+                    <button class="date-button" type="button">
+                        October 2026 <span>⌄</span>
+                    </button>
+                </div>
+            </header>
+
+            <section class="welcome-banner">
+                <div>
+                    <span class="eyebrow">YOUR MONEY, IN FOCUS</span>
+                    <h2>Clarity for every financial decision.</h2>
+                    <p>Understand your spending, track your progress, and build better habits.</p>
+                </div>
+                <div class="banner-decoration">
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+                    <div class="banner-symbol">₹</div>
+                </div>
+            </section>
+
+            <section class="summary-grid" id="overview">
+
+                <article class="summary-card balance-card">
+                    <div class="card-heading">
+                        <span>Total balance</span>
+                        <span class="card-icon">↗</span>
+                    </div>
+                    <div class="metric" id="balance">₹0.00</div>
+                    <div class="metric-caption">
+                        Net of recorded income and expenses
+                    </div>
+                    <div class="card-footer">
+                        <span class="metric-pill">● Demo data</span>
+                        <span>Available balance*</span>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="card-heading">
+                        <span>Total income</span>
+                        <span class="card-icon income-icon">↙</span>
+                    </div>
+                    <div class="metric" id="income">₹0.00</div>
+                    <div class="metric-caption">Recorded incoming funds</div>
+                    <div class="card-footer">
+                        <span class="positive-label">Income</span>
+                        <span class="small-indicator">↗</span>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="card-heading">
+                        <span>Total expenses</span>
+                        <span class="card-icon expense-icon">↗</span>
+                    </div>
+                    <div class="metric" id="expenses">₹0.00</div>
+                    <div class="metric-caption">Recorded outgoing funds</div>
+                    <div class="card-footer">
+                        <span class="neutral-label">Spending</span>
+                        <span class="small-indicator">↘</span>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="card-heading">
+                        <span>Savings rate</span>
+                        <span class="card-icon savings-icon">◎</span>
+                    </div>
+                    <div class="metric" id="savings-rate">0%</div>
+                    <div class="metric-caption">Net balance as a share of income</div>
+                    <div class="card-footer">
+                        <span class="positive-label">Savings indicator</span>
+                        <span class="small-indicator">↗</span>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="analytics-grid" id="analytics">
+
+                <article class="panel spending-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Spending breakdown</h3>
+                            <p>Where your money goes</p>
+                        </div>
+                        <span class="panel-tag">By category</span>
+                    </div>
+
+                    <div class="chart-container doughnut-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+
+                    <div id="category-legend" class="category-legend"></div>
+                </article>
+
+                <article class="panel transactions-panel" id="transactions">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Recent transactions</h3>
+                            <p>Your latest recorded activity</p>
+                        </div>
+                        <span class="panel-tag">Latest 10</span>
+                    </div>
+
+                    <div class="table-toolbar">
+                        <input
+                            type="search"
+                            id="transaction-search"
+                            placeholder="Search transactions..."
+                            aria-label="Search transactions"
+                        >
+
+                        <select id="type-filter" aria-label="Filter transaction type">
+                            <option value="all">All types</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expenses</option>
+                        </select>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>TRANSACTION</th>
+                                    <th>DATE</th>
+                                    <th>AMOUNT</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-body">
+                                <tr>
+                                    <td colspan="3" class="loading-cell">
+                                        Loading transactions...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="transaction-count" class="table-footer">
+                        Loading records...
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="panel budget-panel" id="budget">
+                <div class="panel-header">
+                    <div>
+                        <h3>Spending by category</h3>
+                        <p>See how much has been recorded in each expense category.</p>
+                    </div>
+                    <span class="panel-tag">Expense analysis</span>
+                </div>
+
+                <div id="category-bars" class="category-bars">
+                    <p class="loading-cell">Loading category analysis...</p>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <span>© 2026 Finova Analytics</span>
+                <span>Make every rupee count. <span class="footer-dot">●</span></span>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
