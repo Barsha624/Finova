@@ -1,0 +1,17 @@
+.venv/
+venv/
+env/
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+.git/
+.github/
+
+.env
+.env.*
+
+database/finova.db
+
+.vscode/
