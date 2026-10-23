@@ -12,9 +12,10 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    name: Install and Test Finova
+  test-and-build:
+    name: Test and Build Docker Image
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -31,3 +32,6 @@ jobs:
 
       - name: Run automated tests
         run: python -m pytest -v
+
+      - name: Build Docker image
+        run: docker build -t finova:latest .
